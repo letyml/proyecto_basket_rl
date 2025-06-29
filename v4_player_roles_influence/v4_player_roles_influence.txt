@@ -1,0 +1,28 @@
+Versión 4 - ASIGNACIÓN DE ROLES Y DIFERENTES PROBABILIDADES DE TIRO BASADOS EN DATOS REALES
+
+BASE HEREDADA DE VERSIÓN 1, 2 y 3:
+- Representación visual del tablero mediante Pygame con codificación de zonas (gris, naranja, naranja oscura).
+- Separación entre entorno visual (Pygame) y entorno de entrenamiento (CLI).
+- No se permite solapamiento entre jugadores, solo uno en una misma casilla.
+- El episodio finaliza tras el intento de tiro o la intercepción de un tiro o un pase.
+- Registro automático de métricas, modelos e hiperparámetros con MLflow.
+- Movimiento controlado de los 5 jugadores del equipo con balón mediante acción conjunta (`MultiDiscrete`).
+- Entrenamiento mediante PPO para control simultáneo de múltiples decisiones con una sola política.
+- Acciones: mover, pasar o lanzar si tiene el balón; moverse si no lo tiene.
+- Sistema de intercepción en pases y lanzamientos si hay defensores cercanos (probabilístico).
+- Penalización por pérdida del balón: si el tiro o pase es interceptado, se recibe una recompensa de -1.
+- Probabilidad de acierto en el tiro en función de la distancia a canasta, la zona y la presencia de defensores cercanos.
+- Recompensa proporcional a: probabilidad de acierto × valor de zona de tiro (3 o 2); en caso de fallo, 0.
+- Visualización adaptada según el resultado del tiro: encestado, fallado o interceptado.
+
+NOVEDADES DE ESTA VERSIÓN:
+- Asignación de un rol a cada jugador: base, escolta, alero, ala-pívot y pívot, distribuidos desde el inicio del episodio.
+- Integración con la API oficial de la NBA (https://github.com/swar/nba_api) para descargar datos reales de tiro de jugadores específicos en una temporada concreta.
+- Procesamiento y mapeado de los datos descargados para construir un shot chart personalizado, que refleja el porcentaje de acierto en cada celda del tablero para distintos jugadores.
+- Uso de probabilidades de tiro reales para modificar dinámicamente el comportamiento de los jugadores según su rol.
+
+Esta versión añade una capa de realismo estratégico, incentivando al agente a posicionar correctamente a sus jugadores en función de su perfil, para maximizar el rendimiento ofensivo del equipo.
+
+
+
+
