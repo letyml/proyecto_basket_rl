@@ -1,0 +1,27 @@
+Versión 3 - DEFENSA, PENALIZACIÓN Y ROBOS POR INTERCEPCIÓN
+
+BASE HEREDADA DE VERSIÓN 1 y 2:
+- Representación visual del tablero mediante Pygame con codificación de zonas (gris, naranja, naranja oscuro).
+- Separación entre entorno visual (Pygame) y entorno de entrenamiento (CLI).
+- No se permite solapamiento entre jugadores, solo uno en una misma casilla.
+- El episodio finaliza tras el intento de tiro.
+- Registro automático de métricas, modelos e hiperparámetros con MLflow.
+- Movimiento controlado de los 5 jugadores del equipo con balón mediante acción conjunta (`MultiDiscrete`).
+- Entrenamiento mediante PPO para control simultáneo de múltiples decisiones con una sola política.
+- Acciones: mover, pasar o lanzar si tiene el balón; moverse si no lo tiene.
+- Probabilidad de acierto en el tiro en función de la distancia a canasta y la zona.
+- El tiro puede ser exitoso o fallido. Se adapta la visualización a este resultado.
+- Recompensa proporcional a: probabilidad de acierto en tiro x valor de zona de tiro (3 o 2); en caso de fallo, 0.
+
+NOVEDADES DE ESTA VERSIÓN:
+- Incorporación de lógica defensiva basada en la cercanía de jugadores rivales:
+    · Penalización mayor si el defensor está adyacente, y menor si está a 2 casillas (0.2 y 0.1)
+    · Penalización acumulativa, con umbral mínimo para evitar que la probabilidad de encestar sea 0.
+- Implementación de un sistema de intercepción defensiva en tiros y pases:
+    · Si hay jugadores del equipo rival cerca del objetivo (tirador o receptor), existe una probabilidad de intercepción.
+    · Esta probabilidad disminuye con la distancia al defensor (probabilidad = intercept_prob / distancia).
+    · Tanto los tiros como los pases pueden ser interceptados, finalizando inmediatamente el episodio.
+- Penalización por pérdida del balón: cuando se produce una intercepción (de tiro o pase), el agente recibe una recompensa negativa de -1.
+- En la visualización, si se produce una intercepción, se muestra un mensaje centrado en el campo indicando: "Pelota Perdida".
+
+Esta versión añade realismo defensivo, introduciendo presión del rival como factor que afecta directamente la efectividad del lanzamiento o pase.
