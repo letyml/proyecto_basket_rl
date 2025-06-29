@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./v1_simple_movement/envs",
+        "./common",
+        "./v2_pass_shoot_probability/envs"
+    ]
+}
