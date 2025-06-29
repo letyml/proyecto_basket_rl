@@ -1,0 +1,11 @@
+VERSIÓN 1 - ENTORNO BÁSICO Y CONTROLADO
+
+- Representación visual del tablero mediante Pygame con codificación de zonas (gris, naranja, naranja oscura).
+- Separación entre entorno visual y entorno de entrenamiento (CLI).
+- Movimiento controlado de un único jugador con posesión de balón.
+- Acciones de ese jugador: mover o lanzar
+- Sistema de recompensas estático según zona de tiro: +3 (gris), +2 (naranja), 0 (fallo/movimiento).
+- No se permite solapamiento entre jugadores, solo uno en una misma casilla.
+- Episodio finaliza tras el intento de tiro.
+- Entrenamiento basado en el algoritmo DQN (Deep Q-Network), adecuado para entornos con un solo agente y espacio de acción discreto.
+- Registro automático de métricas, modelos e hiperparámetros con MLflow.
