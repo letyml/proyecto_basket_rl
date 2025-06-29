@@ -1,0 +1,24 @@
+Versión 2 - PASES Y PROBABILIDAD DE TIRO
+
+BASE HEREDADA DE VERSIÓN 1:
+- Representación visual del tablero mediante Pygame con codificación de zonas (gris, naranja, naranja oscura).
+- Separación entre entorno visual (Pygame) y entorno de entrenamiento (CLI).
+- No se permite solapamiento entre jugadores, solo uno en una misma casilla.
+- El episodio finaliza tras el intento de tiro.
+- Registro automático de métricas, modelos e hiperparámetros con MLflow.
+
+NOVEDADES DE ESTA VERSIÓN:
+- Ampliación del control: 
+    · Se introduce control simultáneo de los 5 jugadores del equipo con balón (equipo rojo).
+    · Se reemplaza el algoritmo de entrenamiento DQN por PPO (Proximal Policy Optimization) para permitir acciones `MultiDiscrete` y control conjunto.
+- Ampliación de acciones posibles: 
+    · Se implementa la acción de pase entre jugadores del mismo equipo. 
+    · El jugador con balón puede moverse, lanzar o pasar; los demás pueden desplazarse para posicionarse estratégicamente.
+    · Los jugadores del equipo rival se pueden mover aleatoriamente.
+- Se sustituye la recompensa fija (+3, +2, 0) por una probabilidad de éxito en el tiro:
+    · Calculada en función de la distancia a canasta y de la zona desde la que se lanza.
+    · El resultado del tiro es simulado (éxito o fallo).
+    · La recompensa ahora es proporcional a: probabilidad de acierto en tiro × valor de zona de tiro (3 o 2); en caso de fallo, 0.
+- Se adapta la visualización al resultado (mensaje de éxito o fallo).
+
+Esta versión introduce una toma de decisiones más rica y realista, integrando la gestión de equipo (pase) y la incertidumbre en el lanzamiento.
