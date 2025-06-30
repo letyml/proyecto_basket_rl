@@ -65,7 +65,7 @@ python test_agent_v1.py
 
 ```
 
-Se solicitará el identificador del modelo (model_v1_YYYYMMDD_HHMMSS) y el número de episodios a visualizar.
+Se solicitará el identificador del modelo (model_v1_YYYYMMDD_HHMMSS) y el número identificativo del episodio(s) a visualizar.
 
 > Este script usa `pygame` para mostrar cómo juega el agente en un episodio concreto.
 
